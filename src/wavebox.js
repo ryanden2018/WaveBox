@@ -7,7 +7,7 @@ class WaveBox {
     this.div = document.createElement("div");
     for(let i=0; i<this.width; i++) {
       for(let j=0; j<this.width; j++) {
-        this.image.push(0.0);
+        this.image.push(0.5);
       }
     }
   }
@@ -31,8 +31,9 @@ class WaveBox {
   render() {
     for(let i=0; i<this.width; i++) {
       for(let j=0; j<this.width; j++) {
+        let idx = this.idx(i,j);
         let pxDiv = document.createElement("div");
-        pxDiv.style = this.pxDivStyle(i,j,"gray");
+        pxDiv.style = this.pxDivStyle(i,j,this.color(this.image[idx]));
         this.div.append(pxDiv);
       }
     }
@@ -54,5 +55,10 @@ class WaveBox {
 
   // step forward the physical model
   stepForward() {
+    for(let i=1; i<this.width-1; i++) {
+      for(let j=1; j<this.width-1; j++) {
+        
+      }
+    }
   }
 }
