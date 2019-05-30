@@ -1,13 +1,17 @@
 class WaveBox {
-  constructor(width) {
+  constructor(width,dt) {
     this.width = width;
     this.image = [];
+    this.Dimage = [];
+    this.dt = dt;
     this.cursorX = Math.round(width/2);
     this.cursorY = Math.round(width/2);
     this.div = document.createElement("div");
+    this.t = 0;
     for(let i=0; i<this.width; i++) {
       for(let j=0; j<this.width; j++) {
         this.image.push(0.5);
+        this.Dimage.push(0.0);
       }
     }
   }
@@ -46,7 +50,7 @@ class WaveBox {
       for(let j=0; j<this.width; j++) {
         let idx = this.idx(i,j);
         ///////////
-        this.image[idx] = ((this.pxSz()*i-this.cursorY)**2/100**2+(this.pxSz()*j-this.cursorX)**2/100**2);//////////
+        //this.image[idx] = ((this.pxSz()*i-this.cursorY)**2/100**2+(this.pxSz()*j-this.cursorX)**2/100**2);//////////
         ///////////
         this.div.children[idx].style.background = this.color(this.image[idx]);
       }
@@ -57,7 +61,15 @@ class WaveBox {
   stepForward() {
     for(let i=1; i<this.width-1; i++) {
       for(let j=1; j<this.width-1; j++) {
-        
+        let idx = this.idx(i,j);
+        let idxU = this.idx(i-1,j);
+        let idxD = this.idx(i+1,j);
+        let idxL = this.idx(i,j-1);
+        let idxR = this.idx(i,j+1);
+        this.image[idx] += this.Dimage[idx]*this.dt;
+        this.Dimage[idx] += (this.image[idxU]+this.image[idxD]+
+          this.image[idxL]+this.image[idxR]-4*this.image[idx]) * this.dt
+          + this.dt*10*(Math.sin(this.t))*Math.exp((-10)*((this.pxSz()*i-this.cursorY)**2/50**2+(this.pxSz()*j-this.cursorX)**2/50**2));
       }
     }
   }
