@@ -41,6 +41,7 @@ class WaveBox {
         this.div.append(pxDiv);
       }
     }
+    this.div.style=`position:relative;margin:auto;width:${this.pxSz()*this.width}px;`;
     return this.div;
   }
 
@@ -65,9 +66,9 @@ class WaveBox {
         let idxR = this.idx(i,j+1);
         this.image[idx] += this.Dimage[idx]*this.dt;
         this.Dimage[idx] += (this.image[idxU]+this.image[idxD]+
-          this.image[idxL]+this.image[idxR]-4*this.image[idx]) * this.dt
-          + this.dt*(Math.sin(this.t/10))*Math.exp((-10)*((this.pxSz()*i-this.cursorY)**2/50**2+(this.pxSz()*j-this.cursorX)**2/50**2))
-          - this.dt*0.025*this.Dimage[idx];
+          this.image[idxL]+this.image[idxR]-4*this.image[idx]) * this.dt +
+           this.dt*(Math.sin(this.t/10))*Math.exp((-10)*((this.pxSz()*i-this.cursorY)**2/50**2+(this.pxSz()*j-this.cursorX)**2/50**2)) -
+           this.dt*0.025*this.Dimage[idx];
       }
     }
   }

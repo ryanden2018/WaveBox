@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", e=>{
   let wb = new WaveBox(100,0.01);
   document.querySelector("#wavebox").append(wb.render());
 
-  document.querySelector("#wavebox").children[0].addEventListener("mousemove",
-    e=>{wb.cursorX=e.x;wb.cursorY=e.y;});
+  document.addEventListener("mousemove",
+    e=>{wb.cursorX=e.x-wb.div.offsetLeft;wb.cursorY=e.y-wb.div.offsetTop;});
   
   setInterval( function() {
     for(let i=0; i<100; i++) {
