@@ -7,7 +7,7 @@ class WaveBox {
     this.cursorX = Math.round(width/2);
     this.cursorY = Math.round(width/2);
     this.div = document.createElement("div");
-    this.t = 0;
+    this.c = 0;
     for(let i=0; i<this.width; i++) {
       for(let j=0; j<this.width; j++) {
         this.image.push(0.5);
@@ -67,7 +67,7 @@ class WaveBox {
         this.image[idx] += this.Dimage[idx]*this.dt;
         this.Dimage[idx] += (this.image[idxU]+this.image[idxD]+
           this.image[idxL]+this.image[idxR]-4*this.image[idx]) * this.dt +
-           this.dt*(Math.sin(this.t/10))*Math.exp((-10)*((this.pxSz()*i-this.cursorY)**2/50**2+(this.pxSz()*j-this.cursorX)**2/50**2)) -
+           this.dt*(Math.sin(this.c/10))*Math.exp((-10)*((this.pxSz()*i-this.cursorY)**2/50**2+(this.pxSz()*j-this.cursorX)**2/50**2)) -
            this.dt*0.025*this.Dimage[idx];
       }
     }

@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", e=>{
   setInterval( function() {
     for(let i=0; i<100; i++) {
       wb.stepForward();
-      wb.t += 0.1;
+      wb.c += 0.1;
     }
   }, 1);
 
